@@ -1,0 +1,33 @@
+//declaração das variaveis 
+int claridade = A0 ; 
+ int sensorpre = 3;
+ int acionamento;
+
+void setup()
+{
+  pinMode(2, OUTPUT);
+  pinMode(sensorpre, INPUT);
+  pinMode(claridade, INPUT);
+}
+
+void loop()
+{
+  
+  digitalWrite(2,LOW);
+  acionamento = analogRead(claridade); //Atribuindo na variavel o estado de claridade
+  while (acionamento < 750){ //Enquanto estiver escuro
+    acionamento = analogRead(claridade); //Atribuir valor da claridade na variavel
+  }
+  acionamento = digitalRead(sensorpre); //Ler Sensor de presença
+  if(acionamento == HIGH){ //Se estiver ligado
+    digitalWrite(2,HIGH); //Acender Lampada
+    delay(3000);//Tempo de espera
+  }
+
+  acionamento = analogRead(claridade);
+  while (acionamento < 750){ //Enquanto estiver escuro
+    acionamento = analogRead(claridade);//Ler claridade
+    digitalWrite(2,LOW);//desligar lampada
+  
+  }
+}
